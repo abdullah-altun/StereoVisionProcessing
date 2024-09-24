@@ -1,7 +1,9 @@
 import pyzed.sl as sl
 import numpy as np
 import time
+import cv2
 from image_saving import frameSave
+
 
 def get_zed_resolution(resolution_str):
     resolution_map = {
@@ -41,6 +43,23 @@ def cameraRead(args):
             zed.retrieve_image(right_image, sl.VIEW.RIGHT)
             left_frame = left_image.get_data()
             right_frame = right_image.get_data()
+
+            if args.show:
+                
+
+                if args.show_size is None:
+                    leftImage = left_frame[:,:,:-1]
+                    rigthImage = right_frame[:,:,:-1]
+                else:
+                    size = (args.show_size,args.show_size)
+                    leftImage = cv2.resize(left_frame[:,:,:-1],size)
+                    rigthImage = cv2.resize(right_frame[:,:,:-1],size)
+                
+                cv2.imshow("LeftImages",leftImage)
+                cv2.imshow("RightImages",rigthImage)
+
+                if cv2.waitKey(5) == ord("q"):
+                    break
 
             if (args.frame_save)|(args.video_save):
                 outLeft,outRigth = frameSave(args,left_frame[:,:,:-1],right_frame[:,:,:-1],outLeft,outRigth)

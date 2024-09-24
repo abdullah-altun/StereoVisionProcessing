@@ -9,7 +9,11 @@ def parse_arguments():
     parser.add_argument("--frame_save", type=bool, default=False, help="Her bir kareyi ayrı görüntü olarak kaydetmek istiyorsanız True olarak ayarlayın. (Varsayılan: False)")
     parser.add_argument("--save_time", type=int, default=5, help="Videonun kaç saniye boyunca kaydedileceğini belirtin. (Varsayılan: 5 saniye)")
     parser.add_argument("--frame_time", type=int, default=1, help="Her bir kareyi kaç saniye arayla kaydetmek istediğinizi belirtin. (Varsayılan: 1 saniye)")
+    parser.add_argument("--show",type=bool, default=False, help="")
+    parser.add_argument("--show_size",type=int, default=None, help="")
     return parser.parse_args()
+
+
 
 if __name__ == "__main__":
     args = parse_arguments()
